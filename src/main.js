@@ -21,7 +21,7 @@ var desc2Input = document.querySelector('.user-desc2');
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
-var currentCover;
+var currentCover = [coverImage, randomTitles, taglineOne, taglineTwo];
 
 // Add your event listeners here 👇
 randomButton.addEventListener('click', randomizeCover);
@@ -30,8 +30,9 @@ viewSavedButton.addEventListener('click', showSavedCovers);
 homeButton.addEventListener('click', goHome);
 makeBookButton.addEventListener('click', function(event){
   event.preventDefault()
-  makeBook(imgInput.value, titleInput.value, desc1Input.value, desc2Input.value); 
+  makeBook(imgInput.value, titleInput.value, desc1Input.value, desc2Input.value);
 });
+saveCoverButton.addEventListener('click', saveCover);
 
 // Create your event handlers here 👇
 document.onload = randomizeCover();
@@ -50,7 +51,7 @@ function randomizeCover() {
 }
 
 function showCoverForm() {
-  
+
   formPage.classList.remove('hidden');
   homePage.classList.add('hidden');
   homeButton.classList.remove('hidden');
@@ -88,5 +89,7 @@ function makeBook(cover, title, descriptorOne, descriptorTwo) {
   goHome();
 }
 
-
-
+function saveCover() {
+  var currentBook = new Cover(currentCover[0], currentCover[1], currentCover[2], currentCover[3]);
+  savedCovers.push(currentBook);
+}

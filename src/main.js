@@ -22,6 +22,7 @@ var currentCover;
 randomButton.addEventListener('click', randomizeCover);
 makeCoverButton.addEventListener('click', showCoverForm);
 viewSavedButton.addEventListener('click', showSavedCovers);
+homeButton.addEventListener('click', goHome);
 // Create your event handlers here 👇
 document.onload = randomizeCover();
 
@@ -53,4 +54,13 @@ function showSavedCovers() {
   saveCoverButton.classList.add('hidden');
   homeButton.classList.remove('hidden');
   randomButton.classList.add('hidden');
+}
+
+function goHome() {
+  homePage.classList.remove('hidden');
+  viewSavedPage.classList.add('hidden');
+  formPage.classList.add('hidden');
+  homeButton.classList.add('hidden');
+  randomButton.classList.remove('hidden');
+  saveCoverButton.classList.remove('hidden');
 }

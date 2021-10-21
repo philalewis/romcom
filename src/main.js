@@ -14,7 +14,7 @@ var currentCover;
 randomButton.addEventListener('click', randomizeCover);
 
 // Create your event handlers here 👇
-
+document.onload = randomizeCover();
 
 
 // Functions here

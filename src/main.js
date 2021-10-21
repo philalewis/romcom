@@ -11,6 +11,7 @@ var homeButton = document.querySelector('.home-button');
 var saveCoverButton = document.querySelector('.save-cover-button');
 var viewSavedButton = document.querySelector('.view-saved-button');
 var viewSavedPage = document.querySelector('.saved-view');
+var makeBookButton = document.querySelector('.create-new-book-button');
 
 // We've provided a few variables below
 var savedCovers = [
@@ -23,6 +24,10 @@ randomButton.addEventListener('click', randomizeCover);
 makeCoverButton.addEventListener('click', showCoverForm);
 viewSavedButton.addEventListener('click', showSavedCovers);
 homeButton.addEventListener('click', goHome);
+makeBookButton.addEventListener('click', function(){
+  makeBook(cover, title, descriptorOne, descriptorTwo)
+});
+makeBookButton.preventDefault('click')
 // Create your event handlers here 👇
 document.onload = randomizeCover();
 
@@ -40,6 +45,7 @@ function randomizeCover() {
 }
 
 function showCoverForm() {
+  
   formPage.classList.remove('hidden');
   homePage.classList.add('hidden');
   homeButton.classList.remove('hidden');
@@ -64,3 +70,16 @@ function goHome() {
   randomButton.classList.remove('hidden');
   saveCoverButton.classList.remove('hidden');
 }
+
+function makeBook(cover, title, descriptorOne, descriptorTwo) {
+  var newBook = new Cover(cover, title, descriptorOne, descriptorTwo);
+  covers.push(cover);
+  titles.push(title);
+  descriptors.push(descriptorOne, descriptorTwo);
+}
+//
+
+
+//create function that will instantiate a new cover class and push it
+//to the empty array
+//make sure new poster displays on main page

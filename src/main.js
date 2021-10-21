@@ -12,6 +12,10 @@ var saveCoverButton = document.querySelector('.save-cover-button');
 var viewSavedButton = document.querySelector('.view-saved-button');
 var viewSavedPage = document.querySelector('.saved-view');
 var makeBookButton = document.querySelector('.create-new-book-button');
+var imgInput = document.querySelector('.user-cover');
+var titleInput = document.querySelector('.user-title');
+var desc1Input = document.querySelector('.user-desc1');
+var desc2Input = document.querySelector('.user-desc2');
 
 // We've provided a few variables below
 var savedCovers = [
@@ -24,10 +28,11 @@ randomButton.addEventListener('click', randomizeCover);
 makeCoverButton.addEventListener('click', showCoverForm);
 viewSavedButton.addEventListener('click', showSavedCovers);
 homeButton.addEventListener('click', goHome);
-makeBookButton.addEventListener('click', function(){
-  makeBook(cover, title, descriptorOne, descriptorTwo)
+makeBookButton.addEventListener('click', function(event){
+  event.preventDefault()
+  makeBook(imgInput.value, titleInput.value, desc1Input.value, desc2Input.value); 
 });
-makeBookButton.preventDefault('click')
+
 // Create your event handlers here 👇
 document.onload = randomizeCover();
 
@@ -76,6 +81,11 @@ function makeBook(cover, title, descriptorOne, descriptorTwo) {
   covers.push(cover);
   titles.push(title);
   descriptors.push(descriptorOne, descriptorTwo);
+  coverImage.src = covers[covers.length -1];
+  randomTitles.innerText = titles[titles.length -1];
+  taglineOne.innerText = descriptors[descriptors.length -2];
+  taglineTwo.innerText = descriptors[descriptors.length -1];
+  goHome();
 }
 //
 

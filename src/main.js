@@ -87,9 +87,6 @@ function makeBook(cover, title, descriptorOne, descriptorTwo) {
   taglineTwo.innerText = descriptors[descriptors.length -1];
   goHome();
 }
-//
 
 
-//create function that will instantiate a new cover class and push it
-//to the empty array
-//make sure new poster displays on main page
+

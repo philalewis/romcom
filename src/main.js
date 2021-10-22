@@ -16,6 +16,7 @@ var imgInput = document.querySelector('.user-cover');
 var titleInput = document.querySelector('.user-title');
 var desc1Input = document.querySelector('.user-desc1');
 var desc2Input = document.querySelector('.user-desc2');
+var savedCoverSection = document.querySelector('.saved-covers-section');
 
 // We've provided a few variables below
 var savedCovers = [
@@ -64,6 +65,7 @@ function showSavedCovers() {
   saveCoverButton.classList.add('hidden');
   homeButton.classList.remove('hidden');
   randomButton.classList.add('hidden');
+  displaySavedCovers();
 }
 
 function goHome() {
@@ -88,7 +90,10 @@ function makeBook(cover, title, descriptorOne, descriptorTwo) {
 }
 
 function saveCover() {
-  currentCover = new Cover(coverImage.src, randomTitles.innerText, taglineOne.innerText, taglineTwo.innerText)
+  currentCover = new Cover(coverImage.src, randomTitles.innerText, taglineOne.innerText, taglineTwo.innerText);
+  // if (!savedCovers.includes(currentCover)) {
+  //   savedCovers.push(currentCover);
+  // }
   for (let i = 0; i < savedCovers.length; i++) {
     if (currentCover.cover === savedCovers[i].cover &&
         currentCover.title === savedCovers[i].title &&
@@ -98,4 +103,18 @@ function saveCover() {
     }
   }
   savedCovers.push(currentCover);
+}
+
+function displaySavedCovers() {
+  savedCoverSection.innerHTML = ``;
+  for (let i = 0; i < savedCovers.length; i++) {
+    savedCovers.innerHTML += `
+      <div class="saved-covers" id=${savedCovers[i].id}>
+        <img src=${currentCover[i].cover}></img>
+        <h2 class="cover-title">${currentCover[i].title}</h2>
+        <h3 class="tagline-1">${currentCover[i].tagline1}</h3>
+        <h3 class="tagline-2">${currentCover[i].tagline2}</h3>
+      </div>
+    `
+  }
 }

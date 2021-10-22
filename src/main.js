@@ -109,8 +109,8 @@ function displaySavedCovers() {
   // savedCoverSection.innerHTML = ``;
   for (let i = 0; i < savedCovers.length; i++) {
     savedCoverSection.innerHTML += `
-      <div class="saved-covers" id=${savedCovers[i].id}>
-        <img src=${savedCovers[i].cover}>
+      <div class="mini-cover" id=${savedCovers[i].id}>
+        <img class="mini-cover" src=${savedCovers[i].cover}>
         <h2 class="cover-title">${savedCovers[i].title}</h2>
         <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
       </div>

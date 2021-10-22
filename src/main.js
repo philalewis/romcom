@@ -53,12 +53,20 @@ function randomizeCover() {
 }
 
 function showCoverForm() {
+  clearInputs();
   formPage.classList.remove('hidden');
   homePage.classList.add('hidden');
   viewSavedPage.classList.add('hidden');
   homeButton.classList.remove('hidden');
   randomButton.classList.add('hidden');
   saveCoverButton.classList.add('hidden');
+}
+
+function clearInputs() {
+  imgInput.value = '';
+  titleInput.value = '';
+  desc1Input.value = '';
+  desc2Input.value = '';
 }
 
 function showSavedCovers() {

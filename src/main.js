@@ -21,7 +21,7 @@ var desc2Input = document.querySelector('.user-desc2');
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
-var currentCover = [coverImage, randomTitles, taglineOne, taglineTwo];
+var currentCover = new Cover(coverImage, randomTitles, taglineOne, taglineTwo);
 
 // Add your event listeners here 👇
 randomButton.addEventListener('click', randomizeCover);
@@ -78,7 +78,7 @@ function goHome() {
 }
 
 function makeBook(cover, title, descriptorOne, descriptorTwo) {
-  var newBook = new Cover(cover, title, descriptorOne, descriptorTwo);
+  var currentCover = new Cover(cover, title, descriptorOne, descriptorTwo);
   covers.push(cover);
   titles.push(title);
   descriptors.push(descriptorOne, descriptorTwo);
@@ -90,6 +90,16 @@ function makeBook(cover, title, descriptorOne, descriptorTwo) {
 }
 
 function saveCover() {
-  var currentBook = new Cover(currentCover[0], currentCover[1], currentCover[2], currentCover[3]);
-  savedCovers.push(currentBook);
+  if (!savedCovers.includes(currentCover)) {
+  savedCovers.push(currentCover);
+  }
+  // for (let i = 0; i < savedCovers.length; i++) {
+  //   if (currentCover.cover === savedCovers[i].cover &&
+  //       currentCover.title === savedCovers[i].title &&
+  //       currentCover.tagline1 === savedCovers[i].tagline1 &&
+  //       currentCover.tagline2 === savedCovers[i].tagline2) {
+  //     return;
+  //   }
+  // }
+  // savedCovers.push(currentCover);
 }

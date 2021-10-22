@@ -17,6 +17,7 @@ var titleInput = document.querySelector('.user-title');
 var desc1Input = document.querySelector('.user-desc1');
 var desc2Input = document.querySelector('.user-desc2');
 var savedCoverSection = document.querySelector('.saved-covers-section');
+// var miniCover = document.querySelector('.mini-cover');
 
 // We've provided a few variables below
 var savedCovers = [
@@ -34,6 +35,7 @@ makeBookButton.addEventListener('click', function(event){
   makeBook(imgInput.value, titleInput.value, desc1Input.value, desc2Input.value);
 });
 saveCoverButton.addEventListener('click', saveCover);
+savedCoverSection.addEventListener('dblclick', deleteCover);
 
 // Create your event handlers here 👇
 document.onload = randomizeCover();
@@ -51,11 +53,20 @@ function randomizeCover() {
 }
 
 function showCoverForm() {
+  clearInputs();
   formPage.classList.remove('hidden');
   homePage.classList.add('hidden');
+  viewSavedPage.classList.add('hidden');
   homeButton.classList.remove('hidden');
   randomButton.classList.add('hidden');
   saveCoverButton.classList.add('hidden');
+}
+
+function clearInputs() {
+  imgInput.value = '';
+  titleInput.value = '';
+  desc1Input.value = '';
+  desc2Input.value = '';
 }
 
 function showSavedCovers() {
@@ -106,7 +117,7 @@ function saveCover() {
 }
 
 function displaySavedCovers() {
-  // savedCoverSection.innerHTML = ``;
+  savedCoverSection.innerHTML = ``;
   for (let i = 0; i < savedCovers.length; i++) {
     savedCoverSection.innerHTML += `
       <div class="mini-cover" id=${savedCovers[i].id}>
@@ -114,6 +125,17 @@ function displaySavedCovers() {
         <h2 class="cover-title">${savedCovers[i].title}</h2>
         <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
       </div>
-    `
+    `;
   }
 }
+
+function deleteCover(event) {
+var miniCoverID = Number(event.target.parentNode.id)
+for(let i = 0; i < savedCovers.length; i++) {
+  if(savedCovers[i].id === miniCoverID){
+    savedCovers.splice(i, 1);
+  }
+}
+displaySavedCovers();
+}
+

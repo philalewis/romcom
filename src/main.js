@@ -17,7 +17,7 @@ var titleInput = document.querySelector('.user-title');
 var desc1Input = document.querySelector('.user-desc1');
 var desc2Input = document.querySelector('.user-desc2');
 var savedCoverSection = document.querySelector('.saved-covers-section');
-var miniCover = document.querySelector('.mini-cover');
+// var miniCover = document.querySelector('.mini-cover');
 
 // We've provided a few variables below
 var savedCovers = [
@@ -35,7 +35,7 @@ makeBookButton.addEventListener('click', function(event){
   makeBook(imgInput.value, titleInput.value, desc1Input.value, desc2Input.value);
 });
 saveCoverButton.addEventListener('click', saveCover);
-miniCover.addEventListener('dblclick', deletePoster);
+savedCoverSection.addEventListener('dblclick', deleteCover);
 
 // Create your event handlers here 👇
 document.onload = randomizeCover();
@@ -55,6 +55,7 @@ function randomizeCover() {
 function showCoverForm() {
   formPage.classList.remove('hidden');
   homePage.classList.add('hidden');
+  viewSavedPage.classList.add('hidden');
   homeButton.classList.remove('hidden');
   randomButton.classList.add('hidden');
   saveCoverButton.classList.add('hidden');
@@ -108,7 +109,7 @@ function saveCover() {
 }
 
 function displaySavedCovers() {
-  // savedCoverSection.innerHTML = ``;
+  savedCoverSection.innerHTML = ``;
   for (let i = 0; i < savedCovers.length; i++) {
     savedCoverSection.innerHTML += `
       <div class="mini-cover" id=${savedCovers[i].id}>
@@ -120,12 +121,13 @@ function displaySavedCovers() {
   }
 }
 
-function deleteCover() {
-  var miniCoverID =  
-  for(let i = 0; i < savedCovers.length; i++) {
-    if(savedCovers[i].id === miniCoverID.id) {
-      savedCovers.splice(i, 1);
-    }
-   }
+function deleteCover(event) {
+var miniCoverID = Number(event.target.parentNode.id)
+for(let i = 0; i < savedCovers.length; i++) {
+  if(savedCovers[i].id === miniCoverID){
+    savedCovers.splice(i, 1);
+  }
+}
+displaySavedCovers();
 }
 

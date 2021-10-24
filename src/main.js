@@ -29,10 +29,7 @@ randomButton.addEventListener('click', randomizeCover);
 makeCoverButton.addEventListener('click', showCoverForm);
 viewSavedButton.addEventListener('click', showSavedCovers);
 homeButton.addEventListener('click', goHome);
-makeBookButton.addEventListener('click', function(event){
-  event.preventDefault()
-  makeBook(imgInput.value, titleInput.value, desc1Input.value, desc2Input.value);
-});
+makeBookButton.addEventListener('click', makeBook);
 saveCoverButton.addEventListener('click', saveCover);
 savedCoverSection.addEventListener('dblclick', deleteCover);
 
@@ -44,21 +41,19 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
+function show(element) {
+  element.classList.remove('hidden');
+}
+
+function hide(element) {
+  element.classList.add('hidden');
+}
+
 function randomizeCover() {
   coverImage.src = covers[getRandomIndex(covers)];
   coverTitles.innerText = titles[getRandomIndex(titles)];
   taglineOne.innerText = descriptors[getRandomIndex(descriptors)];
   taglineTwo.innerText = descriptors[getRandomIndex(descriptors)];
-}
-
-function showCoverForm() {
-  clearInputs();
-  formPage.classList.remove('hidden');
-  homePage.classList.add('hidden');
-  viewSavedPage.classList.add('hidden');
-  homeButton.classList.remove('hidden');
-  randomButton.classList.add('hidden');
-  saveCoverButton.classList.add('hidden');
 }
 
 function clearInputs() {
@@ -68,30 +63,40 @@ function clearInputs() {
   desc2Input.value = '';
 }
 
+function showCoverForm() {
+  clearInputs();
+  show(formPage);
+  show(homeButton);
+  hide(homePage);
+  hide(viewSavedPage);
+  hide(saveCoverButton);
+}
+
 function showSavedCovers() {
-  viewSavedPage.classList.remove('hidden');
-  formPage.classList.add('hidden');
-  homePage.classList.add('hidden');
-  saveCoverButton.classList.add('hidden');
-  homeButton.classList.remove('hidden');
-  randomButton.classList.add('hidden');
+  show(viewSavedPage);
+  show(homeButton);
+  hide(formPage);
+  hide(homePage);
+  hide(saveCoverButton);
+  hide(randomButton);
   displaySavedCovers();
 }
 
 function goHome() {
-  homePage.classList.remove('hidden');
-  viewSavedPage.classList.add('hidden');
-  formPage.classList.add('hidden');
-  homeButton.classList.add('hidden');
-  randomButton.classList.remove('hidden');
-  saveCoverButton.classList.remove('hidden');
+  show(homePage);
+  show(randomButton);
+  show(saveCoverButton);
+  hide(veiwSavedPage);
+  hide(homeButton);
+  hide(formPage);
 }
 
-function makeBook(cover, title, descriptorOne, descriptorTwo) {
-  var currentCover = new Cover(cover, title, descriptorOne, descriptorTwo);
-  covers.push(cover);
-  titles.push(title);
-  descriptors.push(descriptorOne, descriptorTwo);
+function makeBook() {
+  event.preventDefault();
+  currentCover = new Cover(imgInput.value, titleInput.value, desc1Input.value, desc2Input.value);
+  covers.push(imgInput.value);
+  titles.push(titleInput.value);
+  descriptors.push(desc1Input.value, desc2Input.value);
   coverImage.src = covers[covers.length -1];
   coverTitles.innerText = titles[titles.length -1];
   taglineOne.innerText = descriptors[descriptors.length -2];
@@ -101,7 +106,7 @@ function makeBook(cover, title, descriptorOne, descriptorTwo) {
 
 function saveCover() {
   currentCover = new Cover(coverImage.src, coverTitles.innerText, taglineOne.innerText, taglineTwo.innerText);
-  for (let i = 0; i < savedCovers.length; i++) {
+  for (var i = 0; i < savedCovers.length; i++) {
     if (currentCover.cover === savedCovers[i].cover &&
         currentCover.title === savedCovers[i].title &&
         currentCover.tagline1 === savedCovers[i].tagline1 &&
@@ -114,7 +119,7 @@ function saveCover() {
 
 function displaySavedCovers() {
   savedCoverSection.innerHTML = ``;
-  for (let i = 0; i < savedCovers.length; i++) {
+  for (var i = 0; i < savedCovers.length; i++) {
     savedCoverSection.innerHTML += `
       <div class="mini-cover" id=${savedCovers[i].id}>
         <img class="mini-cover" src=${savedCovers[i].cover}>
@@ -125,9 +130,9 @@ function displaySavedCovers() {
   }
 }
 
-function deleteCover(event) {
+function deleteCover() {
   var miniCoverID = Number(event.target.parentNode.id)
-  for(let i = 0; i < savedCovers.length; i++) {
+  for(var i = 0; i < savedCovers.length; i++) {
     if(savedCovers[i].id === miniCoverID){
       savedCovers.splice(i, 1);
     }

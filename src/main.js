@@ -84,11 +84,11 @@ function showSavedCovers() {
 
 function goHome() {
   show(homePage);
+  hide(viewSavedPage);
+  hide(formPage);
+  hide(homeButton);
   show(randomButton);
   show(saveCoverButton);
-  hide(veiwSavedPage);
-  hide(homeButton);
-  hide(formPage);
 }
 
 function makeBook() {
@@ -125,6 +125,7 @@ function displaySavedCovers() {
         <img class="mini-cover" src=${savedCovers[i].cover}>
         <h2 class="cover-title">${savedCovers[i].title}</h2>
         <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+        <img class="price-tag" src="./assets/price.png">
       </div>
     `;
   }

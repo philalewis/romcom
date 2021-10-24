@@ -1,7 +1,7 @@
 // Create variables targetting the relevant DOM elements here 👇
 var randomButton = document.querySelector('.random-cover-button');
 var coverImage = document.querySelector('.cover-image');
-var randomTitles = document.querySelector('.cover-title');
+var coverTitles = document.querySelector('.cover-title');
 var taglineOne = document.querySelector('.tagline-1');
 var taglineTwo = document.querySelector('.tagline-2');
 var makeCoverButton = document.querySelector('.make-new-button');
@@ -17,13 +17,12 @@ var titleInput = document.querySelector('.user-title');
 var desc1Input = document.querySelector('.user-desc1');
 var desc2Input = document.querySelector('.user-desc2');
 var savedCoverSection = document.querySelector('.saved-covers-section');
-// var miniCover = document.querySelector('.mini-cover');
 
 // We've provided a few variables below
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
-var currentCover = new Cover(coverImage.src, randomTitles.innerText, taglineOne.innerText, taglineTwo.innerText);
+var currentCover;
 
 // Add your event listeners here 👇
 randomButton.addEventListener('click', randomizeCover);
@@ -47,7 +46,7 @@ function getRandomIndex(array) {
 
 function randomizeCover() {
   coverImage.src = covers[getRandomIndex(covers)];
-  randomTitles.innerText = titles[getRandomIndex(titles)];
+  coverTitles.innerText = titles[getRandomIndex(titles)];
   taglineOne.innerText = descriptors[getRandomIndex(descriptors)];
   taglineTwo.innerText = descriptors[getRandomIndex(descriptors)];
 }
@@ -94,17 +93,14 @@ function makeBook(cover, title, descriptorOne, descriptorTwo) {
   titles.push(title);
   descriptors.push(descriptorOne, descriptorTwo);
   coverImage.src = covers[covers.length -1];
-  randomTitles.innerText = titles[titles.length -1];
+  coverTitles.innerText = titles[titles.length -1];
   taglineOne.innerText = descriptors[descriptors.length -2];
   taglineTwo.innerText = descriptors[descriptors.length -1];
   goHome();
 }
 
 function saveCover() {
-  currentCover = new Cover(coverImage.src, randomTitles.innerText, taglineOne.innerText, taglineTwo.innerText);
-  // if (!savedCovers.includes(currentCover)) {
-  //   savedCovers.push(currentCover);
-  // }
+  currentCover = new Cover(coverImage.src, coverTitles.innerText, taglineOne.innerText, taglineTwo.innerText);
   for (let i = 0; i < savedCovers.length; i++) {
     if (currentCover.cover === savedCovers[i].cover &&
         currentCover.title === savedCovers[i].title &&
@@ -130,12 +126,11 @@ function displaySavedCovers() {
 }
 
 function deleteCover(event) {
-var miniCoverID = Number(event.target.parentNode.id)
-for(let i = 0; i < savedCovers.length; i++) {
-  if(savedCovers[i].id === miniCoverID){
-    savedCovers.splice(i, 1);
+  var miniCoverID = Number(event.target.parentNode.id)
+  for(let i = 0; i < savedCovers.length; i++) {
+    if(savedCovers[i].id === miniCoverID){
+      savedCovers.splice(i, 1);
+    }
   }
+  displaySavedCovers();
 }
-displaySavedCovers();
-}
-
